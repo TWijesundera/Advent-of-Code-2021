@@ -20,7 +20,7 @@ import os.path
 import pathlib
 
 
-def part1(measurements: 'Path') -> int:
+def part1(measurements: "Path") -> int:
     """Count the number of time a depth
     measurements increases from the previous
     measurement.
@@ -52,7 +52,7 @@ def part1(measurements: 'Path') -> int:
     return increases
 
 
-def part2(measurements: 'Path') -> int:
+def part2(measurements: "Path") -> int:
     increases = 0
     with open(measurements, "r", encoding="utf-8") as measure:
         all_measurements = list(map(int, measure.readlines()))
@@ -60,13 +60,12 @@ def part2(measurements: 'Path') -> int:
 
         for line_num in range(len(all_measurements) - 3):
             if previous_sum == 0:
-                previous_sum = sum(all_measurements[line_num:line_num+4])
-            if sum(all_measurements[line_num:line_num+4]) > previous_sum:
+                previous_sum = sum(all_measurements[line_num : line_num + 4])
+            if sum(all_measurements[line_num : line_num + 4]) > previous_sum:
                 increases += 1
-            previous_sum = sum(all_measurements[line_num:line_num+4])
+            previous_sum = sum(all_measurements[line_num : line_num + 4])
 
     return increases
-
 
 
 def is_file(path: str):
@@ -75,15 +74,18 @@ def is_file(path: str):
     else:
         return pathlib.Path(path)
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Given a list of measurements,
         return the number of times the deapth measurement increases"""
     )
-    parser.add_argument("measurements",
-                        metavar="<measurements_file>",
-                        type=is_file,
-                        help="Path to measurements.txt file")
+    parser.add_argument(
+        "measurements",
+        metavar="<measurements_file>",
+        type=is_file,
+        help="Path to measurements.txt file",
+    )
     args = parser.parse_args()
 
     print(part1(args.measurements))
