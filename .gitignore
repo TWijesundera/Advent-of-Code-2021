@@ -24,5 +24,8 @@
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
 
+### Python ###
+__pypackages__/
+
 ### Advent of Code ###
 input-files/*

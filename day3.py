@@ -3,6 +3,7 @@ from collections import Counter
 
 from typing import List
 
+
 def part1(input):
     bit_count = {}
 
@@ -27,15 +28,18 @@ def part2(input):
     carbon = "".join(filter_bits(input_lines, least_common_value))
     print(f"Part 2 solution is: {int(oxygen, base=2) * int(carbon, base=2)}")
 
+
 def most_common_value(count: Counter):
     if count.get("1") == count.get("0"):
         return "1"
     return count.most_common(1)[0][0]
 
+
 def least_common_value(count: Counter):
     if count.get("1") == count.get("0"):
         return "0"
     return count.most_common()[:0:-1][0][0]
+
 
 def filter_bits(lines: List, criteria, index=0):
     if len(lines) <= 1:
@@ -44,7 +48,8 @@ def filter_bits(lines: List, criteria, index=0):
         count = Counter()
         [count.update(line[index]) for line in lines]
         filtered = [line for line in lines if line[index] == criteria(count)]
-        return filter_bits(filtered, criteria, index+1)
+        return filter_bits(filtered, criteria, index + 1)
+
 
 if __name__ == "__main__":
     parser = Parser()

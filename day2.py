@@ -3,6 +3,7 @@ import os
 import argparse
 from dataclasses import dataclass
 
+
 @dataclass
 class Submarine:
 
@@ -24,21 +25,25 @@ class Submarine:
     def final_answer(self):
         return self.depth * self.horizontal
 
+
 def is_file(path: str):
     if not os.path.exists(path):
         argparse.ArgumentError(f"Unable to find file {path}")
     else:
         return pathlib.Path(path)
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""Given a list of measurements,
         return the number of times the deapth measurement increases"""
     )
-    parser.add_argument("course",
-                        metavar="<course_commands_file>",
-                        type=is_file,
-                        help="Path to course.txt file")
+    parser.add_argument(
+        "course",
+        metavar="<course_commands_file>",
+        type=is_file,
+        help="Path to course.txt file",
+    )
     args = parser.parse_args()
 
     sub = Submarine()
@@ -52,6 +57,5 @@ if __name__ == "__main__":
                     sub.add_aim(int(number))
                 case ["up", number]:
                     sub.subtract_aim(int(number))
-
 
     print(f"Final result: {sub.final_answer()}")
